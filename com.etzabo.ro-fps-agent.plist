@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.etzabo.ro-fps-agent</string>
+    <key>ProgramArguments</key>
+    <array>
+		<string>/bin/sh</string>
+		<string>-c</string>
+		<string>
+		targetFps=10000
+		robloxPath="/Applications/Roblox.app"
+
+		if [ ! -d "$robloxPath" ]; then
+			robloxPath="$HOME/Applications/Roblox.app"
+			if [ ! -d "$robloxPath" ]; then
+				echo "Roblox must be installed in /Applications."
+				exit
+			fi
+		fi
+
+		clientSettingsPath="$robloxPath/Contents/MacOS/ClientSettings"
+
+		if [ ! -d "$clientSettingsPath" ]; then
+			mkdir "$clientSettingsPath"
+		fi
+
+		echo '{
+			"DFIntTaskSchedulerTargetFps": '"$targetFps"'
+		}' > "$clientSettingsPath/ClientAppSettings.json"
+		</string>
+		</array>
+		<key>RunAtLoad</key>
+		<true/>
+		<key>KeepAlive</key>
+		<dict>
+			<key>PathState</key>
+			<dict>
+				<key>/Applications/Roblox.app/Contents/MacOS/ClientSettings/ClientAppSettings.json</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
+</plist>
