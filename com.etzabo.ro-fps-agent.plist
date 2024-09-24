@@ -9,7 +9,7 @@
 		<string>/bin/sh</string>
 		<string>-c</string>
 		<string>
-		targetFps=10000
+		targetFps=240
 		robloxPath="/Applications/Roblox.app"
 
 		if [ ! -d "$robloxPath" ]; then
